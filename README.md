@@ -1,2 +1,2 @@
 # MD-SAM-AL
-Cold-Start Active Learning for SAM via Mask Discrepancies
+This is a cold-Start Active Learning for SAM via Mask Discrepancies
