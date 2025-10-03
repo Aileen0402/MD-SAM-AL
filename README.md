@@ -6,7 +6,7 @@ Cold-Start Active Learning for SAM via Mask Discrepancies
 
 </div>
 
-> MD-SAM-AL: This repository implements a mask-difference based active learning training framework. The code example is built on the ISIC-2017 skin lesion dataset. Download: [ISIC Challenge 2017 dataset](https://challenge.isic-archive.com/data/#2017).
+> MD-SAM-AL: This repository implements a mask-difference based cold-start active learning training framework. The code example is built on the ISIC-2017 skin lesion dataset. Download: [ISIC Challenge 2017 dataset](https://challenge.isic-archive.com/data/#2017).
 
 ## Highlights
 - Top-K active learning per epoch: score by mask-difference (three prompts) and select `batch_size` images for annotation.
