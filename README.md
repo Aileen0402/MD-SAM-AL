@@ -1,8 +1,8 @@
 <div align="center">
 
-# HLES-SAM2 Public
+# MD-SAM-AL
 
-Active Learning for SAM2-based Skin Lesion Segmentation with LoRA fine-tuning.
+Cold-Start Active Learning for SAM via Mask Discrepancies
 
 </div>
 
@@ -44,10 +44,27 @@ data_root/
 ```
 Masks follow the naming: `image_name_segmentation.png`.
 
+### SAM2 Weights
+Trainer expects the following paths (already set in `trainer.py`):
+```
+model_cfg = ./sam2/configs/sam2.1/sam2.1_hiera_l.yaml
+checkpoint = ./sam2/checkpoints/sam2.1_hiera_large.pt
+```
+Prepare them as follows:
+```bash
+mkdir -p sam2/checkpoints
+# Place the SAM2 checkpoint here (rename to sam2.1_hiera_large.pt)
+# Ensure the config file exists at sam2/configs/sam2.1/sam2.1_hiera_l.yaml
+```
+
+Download SAM2 (official):
+- Repo: https://github.com/facebookresearch/segment-anything-2
+- Model checkpoints: https://github.com/facebookresearch/segment-anything-2?tab=readme-ov-file#model-checkpoints
+
 ## Quick Start
 Train with active learning + dual-decoder supervision:
 ```bash
-python public/trainer.py \
+python trainer.py \
   --data_root /path/to/skin_lesion_dataset \
   --output /path/to/output \
   --gpu 0 \
@@ -98,7 +115,3 @@ net = pkg.LoRA_Sam(sam, r=4).cuda()
 net.load_state_dict(torch.load("/path/to/best_model_dice0.8732.pth"))
 net.eval()
 ```
-
-## Notes
-- AL scoring is batched on GPU and uses AMP; reduce internal mini-batch if memory is limited.
-- The script does not execute `sam_lora_image_encoder_prompt.py`'s `__main__`; it is imported by `trainer.py`.
